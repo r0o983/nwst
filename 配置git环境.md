@@ -126,6 +126,16 @@
 
 ### 添加远程库
 
-1. 在github上创建一个公开仓库，选择从本地上传文件到远程仓库
+在github上创建一个公开仓库，选择从本地上传文件到远程仓库
 
-   `git remote add origin git@github.com:christopher-x/nwst.git`
+`git remote add origin git@github.com:christopher-x/nwst.git`
+
+`git branch -M main`
+
+`git push -u origin main`
+
+### 克隆远程仓库
+
+登陆帐号，找到需要克隆的远程仓库，使用如下命令即可
+
+`git clone git@github.com:christopher-x/TCPNotes.git`
