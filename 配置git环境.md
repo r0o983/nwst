@@ -161,3 +161,48 @@
    `git branch`
 
    当前分支前会出现一个`*` 号
+   
+3. 在当前分支创建一个文件并合并到主分支
+
+   ```
+   git checkout dev //切换到dev分支
+   echo hello,this is my first projects > README.md
+   git add . //将新增的文件添加到当前分支本地暂存区  ps：这一步可省略
+   git commit -m "upgrade"  ps：这一步可省略
+   git checkout main //切换回主分支
+   git merge dev //将dev分支的工作成果合并到主分支，此时在dev的文件内容就和主分支的文件一样了
+   ```
+
+4. 删除分支
+
+   `git branch -d dev` 
+
+   删除dev分支，删除之前需切换到其他分支
+
+5. switch
+
+   `git switch -c dev`
+
+   创建并切换到新的dev分支
+
+   `git switch main`
+
+   切换到已有的分支
+
+   使用新的`git switch`命令，比`git checkout`要更容易理解。
+
+#### 小结
+
+Git鼓励大量使用分支：
+
+查看分支：`git branch`
+
+创建分支：`git branch `
+
+切换分支：`git checkout `或者`git switch `
+
+创建+切换分支：`git checkout -b `或者`git switch -c `
+
+合并某分支到当前分支：`git merge `
+
+删除分支：`git branch -d `
