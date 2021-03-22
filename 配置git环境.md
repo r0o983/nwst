@@ -139,3 +139,25 @@
 登陆帐号，找到需要克隆的远程仓库，使用如下命令即可
 
 `git clone git@github.com:christopher-x/TCPNotes.git`
+
+## 分支管理
+
+### 创建分支与合并管理
+
+当前版本存在主分支用于提交，`master`分支`Head`严格来说不是指向提交，而是指向`master`，`master`才是指向提交的，所以，`head`指向就是当前分支
+
+1. 创建分支
+
+   `git chechout -b dev`  创建分支并切换到当前分支
+
+   `git checkout`命令加上`-b`参数表示创建并切换，相当于以下两条命令：
+
+   `git branch dev ` 创建分支
+
+   `git checkout dev ` 切换分支
+
+2. 查看当前分支
+
+   `git branch`
+
+   当前分支前会出现一个`*` 号
