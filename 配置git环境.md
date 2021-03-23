@@ -308,11 +308,11 @@ Git鼓励大量使用分支：
 - 命令`git push origin `可以推送一个本地标签；
 - 命令`git push origin --tags`可以推送全部未推送过的本地标签；
 - 命令`git tag -d `可以删除一个本地标签；
-- 命令`git push origin :refs/tags/`可以删除一个远程标签。
+- 命令`git push origin :refs/tags/`可以删除一个远程标签
 
-### 自定义操作
+## 自定义操作
 
-忽略某些特定的后缀名文件
+### 忽略某些特定的后缀名文件
 
 在Git工作区的根目录下创建一个特殊的`.gitignore`文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。
 
@@ -333,7 +333,45 @@ git check-ignore -v app.class
 .gitignore:3:*.class  app.class
 ```
 
+排除当前文件的忽略情况
 
+```
+# 不排除.gitignore和App.class:
+!.gitignore
+!App.class
+```
 
+- 忽略某些文件时，需要编写`.gitignore`；
+- `.gitignore`文件本身要放到版本库里，并且可以对`.gitignore`做版本管理！
 
+### 配置别名
+
+`git config --global alias.st status` 将status简化为st
+
+`--global`参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
+
+`git config --global alias.last 'log -1'` 显示最后一次的提交信息
+
+`git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"` 提交结构改良
+
+#### 配置文件
+
+配置Git的时候，加上`--global`是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用。
+
+配置文件放哪了？每个仓库的Git配置文件都放在`.git/config`文件中：
+
+当前用户的Git配置文件放在用户主目录下的一个隐藏文件`.gitconfig`中：
+
+```
+[user]
+        name = x0x0
+        email = xxxx@gmail.com
+[color]
+        ui = true
+[alias]
+        st = status
+        last = log -1
+        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+```
 
