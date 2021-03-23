@@ -6,11 +6,11 @@
 
 ### 配置git用户名以及邮箱等信息
 
-> git config --global user.name "Rookie"
+> git config --global user.name "x0x0"
 >
 > git config --global user.email "xxx@gmail.com"
 >
-> 
+> git config --global color.ui true 配置颜色信息
 
 ### 初始化本地仓库
 
@@ -251,7 +251,89 @@ Git鼓励大量使用分支：
 
 在master分支上修复的bug，想要合并到当前dev分支，可以用`git cherry-pick `命令，把bug提交的修改“复制”到当前分支，避免重复劳动。
 
-### Feature分支
+### 多人协作
 
-`git checkout -b feature` 创建并切换到当前分支
+`git remote -v ` 显示远程仓库的详细信息
+
+`git push origin *name` 推送某一个分支
+
+从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交
+
+- 在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致
+- 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`
+- 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突
+
+## 标签管理
+
+**给当前commit的文件弄一个我们能记住的名字**
+
+### 创建标签
+
+`git branch` 切换到需要打标签的分支上
+
+`git tag v1.0` 当前分支的标签为1.0
+
+`git tag` 查看所有标签
+
+给已经存在的commit打上标签，找到之前的commit id
+
+`git tag v0.9 f52c66`
+
+`git show <tagname>` 查看当前版本的标签信息
+
+创建带有说明的标签，用`-a`指定标签名，`-m`指定说明文字：
+
+`git tag -a v0.1 -m "version 0.1 released" 1094adb`
+
+### 操作标签
+
+如果想要删除某个本地标签可以使用
+
+`git tag -d v0.1`
+
+#### 操作标签到远程仓库
+
+`git push origin v1.0` 推送1.0的标签到远程仓库
+
+`git push origin --tags` 推送所有本地标签到远程仓库
+
+删除远程仓库的标签--需要先从本地删除
+
+`git tag -d v0.9` 
+
+然后从远程仓库删除 
+
+`git push origin :refs/tags/v0.9`
+
+- 命令`git push origin `可以推送一个本地标签；
+- 命令`git push origin --tags`可以推送全部未推送过的本地标签；
+- 命令`git tag -d `可以删除一个本地标签；
+- 命令`git push origin :refs/tags/`可以删除一个远程标签。
+
+### 自定义操作
+
+忽略某些特定的后缀名文件
+
+在Git工作区的根目录下创建一个特殊的`.gitignore`文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。
+
+忽略文件的原则是：
+
+1. 忽略操作系统自动生成的文件，比如缩略图等；
+2. 忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的`.class`文件；
+3. 忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。
+
+强行提交某些**已忽略**文件到git远程仓库
+
+`git add -f app.class` 使用-f参数来强行添加到git
+
+使用`git check-ignore`来检查规则是否正确
+
+```
+git check-ignore -v app.class
+.gitignore:3:*.class  app.class
+```
+
+
+
+
 
