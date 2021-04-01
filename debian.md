@@ -40,6 +40,18 @@
   git clone https://github.com/zsh-users/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions
   source ~/.zshrc
+  
+  # 首先用vim进入.zshrc配置文件
+  vim ~/.zshrc
+  
+  # 之后利用vim编辑文件为
+  plugins=(
+          zsh-syntax-highlighting
+          zsh-autosuggestions
+          )
+  source $ZSH/oh-my-zsh.sh
+  source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
   ```
 
 
