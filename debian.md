@@ -37,9 +37,11 @@
   安装提示sudo apt install zsh-syntax-highlighting
   插件安装
   cd ~/.oh-my-zsh/plugins
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-autosuggestions
-  source ~/.zshrc
+  git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+   
+  
   
   # 首先用vim进入.zshrc配置文件
   vim ~/.zshrc
@@ -49,9 +51,9 @@
           zsh-syntax-highlighting
           zsh-autosuggestions
           )
-  source $ZSH/oh-my-zsh.sh
-  source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  
+  # 刷新配置文件
+  source ~/.zshrc
   ```
 
 
