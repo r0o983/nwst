@@ -48,6 +48,7 @@
   
   # 之后利用vim编辑文件为
   plugins=(
+  		git
           zsh-syntax-highlighting
           zsh-autosuggestions
           )
