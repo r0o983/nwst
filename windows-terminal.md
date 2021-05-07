@@ -105,10 +105,13 @@ scoop uninstall git 卸载
 
 在`PowerShell`中输入`notepad $profile`用文本打开powershell的配置文件，并输入以下内容
 
-```
+```shell
 Import-Module posh-git
 Import-Module oh-my-posh
 Set-PoshPrompt -Theme Paradox  //此处与官网文档给出的安装不同，md这是个神坑
+#推荐主题
+Set-PoshPrompt -Theme agnoster
+Set-PoshPrompt -Theme Argonaut
 ```
 
 ## 字体设置
