@@ -35,7 +35,7 @@ size   // 镜像的大小
   可选：[:tag]
   
   删除镜像命令
-  docker rmi -f $(docker images -aq)// 删除全部镜像
+  docker rmi -f $(docker images -aq)   // 删除全部镜像
   docker rmi -f id或者名称 //删除某一个镜像，默认删除最新版的镜像
   docker rmi -f id id 名称 名称 //删除多个镜像，以空格区分
   
@@ -112,7 +112,7 @@ size   // 镜像的大小
 ```
 //安装docker pull elasticsearch
 
-docker run -d --name elasticsearch -p9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms64m -Xmx512m" elasticsearch:7.6.2
+docker run -d --name elasticsearch -p9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms64m -Xmx512m" elasticsearch:7.6
 
 docker stats  容器id// 查看当前docker占用状态
 参数说明：
