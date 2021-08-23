@@ -204,24 +204,24 @@ docker run -it --name docker02 --volumes-from docker01 b59 //启动子容器
 
 ## 重启服务器后需要开启docker进程
 
-> sudo service docker restart  
-> 设置开机启动  
+> sudo service docker restart 
+> 设置开机启动 
 > systemctl enable docker
 
 ## dockerfile 构建
 
-> FROM ：基础镜像  
-> MAINTAINER :指定维护者信息  
-> RUN ：需要执行的命令  
-> ADD ：copy文件，会自动解压  
+> FROM ：基础镜像 
+> MAINTAINER :指定维护者信息 
+> RUN ：需要执行的命令 
+> ADD ：copy文件，会自动解压 
 > WORKDIR ：工作目录
-> VOLUME ： 设置容器卷，挂载位置  
-> EXPOSE ：对外指定端口  
+> VOLUME ： 设置容器卷，挂载位置 
+> EXPOSE ：对外指定端口 
 > RUN ：执行命令
-> CMD ：指定容器启动时运行的命令，只有最后一个会生效，可被替代  
-> ENTRYPOINT ：指定容器启动时运行的命令，可以追加命令  
-> ONBUILD ： 当构建对象被继承dockerfile，这个时候就会运行onbuild指令，触发执行  
-> COPY ： 类似ADD命令，将文件拷贝到镜像中  
+> CMD ：指定容器启动时运行的命令，只有最后一个会生效，可被替代
+> ENTRYPOINT ：指定容器启动时运行的命令，可以追加命令
+> ONBUILD ： 当构建对象被继承dockerfile，这个时候就会运行onbuild指令，触发执行 
+> COPY ： 类似ADD命令，将文件拷贝到镜像中
 > ENV ： 构建时设置环境变量
 
 ### dockerfile构建测试
