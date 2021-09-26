@@ -42,6 +42,8 @@ https://pve.proxmox.com/wiki/Downloads
 
 查看下载镜像：pveam list local 
 
+**普通ISO文件目录为`/var/lib/vz/template/iso`**
+
 ## 开启远程桌面
 
 ``sudo apt install xrdp `` 安装后该服务会默认进行启动，使用``systemctl status xrdp``查看状态
@@ -50,7 +52,7 @@ https://pve.proxmox.com/wiki/Downloads
 
 ## 安装zsh
 
-`sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+`apt install curl git wget zsh && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
 ## 安装frp并设置开机自启动
 
@@ -134,4 +136,108 @@ acme.sh --set-default-ca  --server letsencrypt
 key上传：私钥，证书链上传：fullchain.cer
 
 证书配置完成---撒花。
+
+
+
+
+
+qm importdisk 100  /var/lib/vz/template/iso/bleach-plus-20210904-openwrt-x86-64-generic-squashfs-combined-efi.img local-lvm
+
+
+
+
+
+## PVE 网络配置
+
+`vi /etc/network/interfaces` 修改能访问到的IP地址
+
+`vi /etc/resolv.conf 设置dns地址.  刚进入pve的时候没网
+
+`vi /etc/issue` 修改控制台地址
+
+`vi /etc/hosts.  修改控制台地址
+
+## Pve 硬盘挂载
+
+1. 新硬盘格式化
+
+安装一个新硬盘后，
+
+在终端输入，查看硬盘分区：
+
+ls -al /dev/sd*
+
+当然也可以进入web管理页面，节点 --> 磁盘。
+
+就能看到你新接入的设备名称
+
+使用fdisk 命令给新硬盘分一个区
+
+```undefined
+fdisk /dev/sdb
+```
+
+​	硬盘格式化为ext4
+
+```undefined
+ls -al /dev/sd*
+```
+
+sdb1 就是分出来的新分区，但还没有格式化
+
+```undefined
+mkfs.ext4 /dev/sdb1 -m0
+```
+
+### 挂载硬盘
+
+新增一个文件夹，名称可以自定义
+
+```kotlin
+mkdir /mnt/pve/data
+```
+
+将sdb1挂载到 /mnt/pve/data
+
+```kotlin
+mount /dev/sdb1 /mnt/pve/data
+```
+
+### 启动自动挂载
+
+```csharp
+ls -alF /dev/disk/by-uuid/
+```
+
+记下 sdb1 的那一长串 uuid，我这里是 xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+将uuid写入 /etc/fstab 中，以后每次开机就会自动加载新硬盘，并挂载到 /mnt/pve/data 目录下。
+
+```undefined
+vim /etc/fstab
+```
+
+加入两行
+
+```kotlin
+UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx  /mnt/pve/data  ext4  defaults 0 1
+```
+
+按esc，输入:wq ，回车保存退出。
+
+查看是否挂载成功
+
+```undefined
+mount -a
+```
+
+让系统将/etc/fstab的所有内容重新加载，这样不用重启。
+
+```undefined
+mount -l
+```
+
+### 添加新的存储
+
+pve界面中进入，数据中心 --- 存储 --- 目录，点击添加即可
 
