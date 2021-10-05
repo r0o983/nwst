@@ -110,7 +110,7 @@ scoop uninstall git 卸载
 ```shell
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-PoshPrompt -Theme Paradox  //此处与官网文档给出的安装不同，md这是个神坑
+Set-PoshPrompt -Theme Paradox  #此处与官网文档给出的安装不同，md这是个神坑
 #推荐主题
 Set-PoshPrompt -Theme agnoster
 Set-PoshPrompt -Theme Argonaut
