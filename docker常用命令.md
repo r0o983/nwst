@@ -44,6 +44,7 @@ size   // 镜像的大小
   docker run [可选参数] images
   参数说明：
   --name="Name" 容器名称 tomcat01 tomcat02,用来区分容器
+  --restart=always  重启docker时重启该容器
   -d  //后台方式运行
   -it //使用交互方式运行，进入容器查看内容
   -p // 指定容器的端口-p 8080:8080
@@ -51,7 +52,9 @@ size   // 镜像的大小
   	-p 主机端口：容器端口（常用）
   	-p 容器端口
   -P // 随机指定端口
+  
   例子：docker run -it centos /bin/bash
+  
   
   列出所有正在运行的容器
   docker ps //查看当前正在运行的容器

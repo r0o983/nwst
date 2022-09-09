@@ -41,7 +41,7 @@ scoop uninstall git 卸载
 在`schemes`中定义配色方案，使用以下格式定义
 
 ```
-{
+	{
     "background" : "#282A36",
     "black" : "#21222C",
     "blue" : "#BD93F9",
@@ -122,3 +122,71 @@ https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Meslo/M/Regula
 
 直接下载安装即可！
 
+
+
+
+
+## wsl 配置ubuntu20.4
+
+> 获取来源:微软商店下载
+
+* 配置过程,略
+
+
+
+### 配置wsl2的子系统ssh访问
+
+1. 开启宿主机转发
+
+   * 配置防火墙设置
+   * 打开防火墙——选择高级设置
+   * 选择入站规则--新建规则--选择端口--指定端口(23)
+
+   ```sh
+   # 端口设置为23,并转发到子系统的23端口--》这里的connectaddress地址为子系统地址.
+   
+   netsh interface portproxy add v4tov4 listenport=23 listenaddress=0.0.0.0 connectport=23 connectaddress=172.28.81.57 (需提升至管理员权限)
+   
+   # 查看是否设置成功
+   netsh interface portproxy show all
+   
+   ```
+
+2. 设置子系统的端口以及服务启动
+
+   * 查看是否有安装服务,以及服务状态
+
+     > ssh -V
+     >
+     > systemctl status ssh
+
+     Tips:(如果遇到systemctl无法顺利执行,则执行以下两条命令)
+
+     ​	1325  sudo -b unshare --pid --fork --mount-proc /lib/systemd/systemd --system-unit=basic.target                                                                                                                                                          
+
+     ​	1326  sudo -E nsenter --all -t $(pgrep -xo systemd) runuser -P -l $USER -c "exec $SHELL" 
+
+   * 编辑配置文件
+
+     `vim /etc/ssh/sshd_config`
+
+     ```shell
+      # 修改默认的端口,此处设置对应宿主机转发的端口
+      15 Port 23
+      
+      # 开启root用户可登陆
+      34 PermitRootLogin yes
+      
+      # 开启密码登陆
+      58 PasswordAuthentication yes
+     ```
+
+     `vim /etc/hosts.allow`
+
+     ```shel
+     # 配置接受所有的ssh连接
+     
+     sshd:ALL
+     ```
+
+3. 

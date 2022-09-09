@@ -130,6 +130,8 @@
 
 `git remote add origin git@github.com:christopher-x/nwst.git`
 
+执行上面命令之前,需要先初始化本地库`git init `
+
 `git branch -M main`
 
 `git push -u origin main`
