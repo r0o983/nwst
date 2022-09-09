@@ -137,7 +137,7 @@ key上传：私钥，证书链上传：fullchain.cer
 
 证书配置完成---撒花。
 
-
+~/.acme.sh/acme.sh --issue --debug --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please -d "freeworklab.com" -d "*.freeworklab.com"
 
 
 
@@ -217,7 +217,7 @@ ls -alF /dev/disk/by-uuid/
 vim /etc/fstab
 ```
 
-加入两行
+加入一行
 
 ```kotlin
 UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx  /mnt/pve/data  ext4  defaults 0 1
