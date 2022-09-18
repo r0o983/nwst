@@ -4,9 +4,9 @@
 
 `hub.docker.com/_/nextcloud/`
 
-## 拉取镜像（mysql）
+## mac 安装（mysql）
 
-配置mysql并设置开机启动，进行持久化数据
+brew install mysql
 
 
 
@@ -32,5 +32,7 @@ docker run -d --restart=always --name nextcloud -p 80:80 nextcloud
 
 * 设置用户名以及密码
 
-  * 
+* 
+
+* 从容器内访问宿主机的mysql则需要使用以下命令:`docker.for.mac.host.internal`
 
