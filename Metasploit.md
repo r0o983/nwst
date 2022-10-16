@@ -305,7 +305,7 @@ python3 -m http.server 8000
 
 
 
-
+![image-20220925144159670](https://raw.githubusercontent.com/r0o983/images/main/image-20220925144159670.png)
 
 
 

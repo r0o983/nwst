@@ -27,4 +27,3 @@ firewalld centos7
 `systemctl stop firewalld`
 
 `systemctl disable firewalld` 
-
