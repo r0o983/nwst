@@ -197,13 +197,13 @@ tips：[点我查看各大浏览器提交大小的限制](https://developer.aliy
 
 **知识储备：**
 
-sleep（）：                                     Sleep函数可以使计算机程序（进程，任务或线程）进入休眠
+sleep（）：                              Sleep函数可以使计算机程序（进程，任务或线程）进入休眠
 
-if（）：                                           if 是 计算机编程语言一个关键字，分支结构的一种
+if（）：                                 if 是 计算机编程语言一个关键字，分支结构的一种
 
-mid(a,b,c):                                      从b开始，截取a字符串的c位
+mid(a,b,c):                             从b开始，截取a字符串的c位
 
-substr(a,b,c)：                                从b开始，截取字符串a的c长度
+substr(a,b,c)：                         从b开始，截取字符串a的c长度
 
 left(database(),1),database() :         left(a,b)从左侧截取a的前b位
 
