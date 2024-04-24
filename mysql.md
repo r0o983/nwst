@@ -198,7 +198,7 @@ EOF
 
 ### 添加用户：
 
-`create user sparrow@"%" identified by "123"`
+`create user sparrow@"%" identified by "123";`
 
 查看当前数据库的版本`select @@version;`
 

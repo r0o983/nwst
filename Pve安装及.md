@@ -100,6 +100,8 @@ token = ^&*&*&*%%^ 		\\ 此处可以瞎几把写，客户端需保持和服务�
 
 将本地的密钥传输到服务器中
 
+使用cat进行远程写入 `cat ~/.ssh/id_rsa.pub | ssh username@1.1.1.1 'cat - >> ~/.ssh/authorized_keys'` 远程写入文件,第一个cat将文件读出,使用ssh进行标准连接,再使用`cat - `进行标准读取输入数据 
+
 注意：如果服务器本身已有`authorized_keys`文件则需要追加写入到该文件中（否则会直接覆盖掉该文件，要注意），使用如下命令：
 
 `cat ~/.ssh/id_rsa.pub ` 将得到的密钥写入到`authorized_keys`中
@@ -151,11 +153,11 @@ qm importdisk 100  /var/lib/vz/template/iso/bleach-plus-20210904-openwrt-x86-64-
 
 `vi /etc/network/interfaces` 修改能访问到的IP地址
 
-`vi /etc/resolv.conf 设置dns地址.  刚进入pve的时候没网
+`vi /etc/resolv.conf` 设置dns地址.  刚进入pve的时候没网
 
 `vi /etc/issue` 修改控制台地址
 
-`vi /etc/hosts.  修改控制台地址
+`vi /etc/hosts`  修改控制台地址
 
 ## Pve 硬盘挂载
 

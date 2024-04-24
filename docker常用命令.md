@@ -144,7 +144,7 @@ docker commit -m="chanage tomcat" -a="show" a231b23 tomcat:8.1
 docker run -it -v 主机目录：容器内目录 
 
 安装mysql 并设置持久化数据
-docker run -d -p3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run -d -p3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql --restart=always
 参数说明：
 -e 设置系统配置
 -v 挂载目录
@@ -388,7 +388,7 @@ CMD /usr/local/apache-tomcat-10.0.2/bin/startup.sh && -F /url/local/apache-tomca
 ### 将其他网络中的容器连通到创建的网络中  
 
 > docker run -d -P --name tomcat01 tomcat  //创建一个容器
-> docker network connect mynet tomcat01 //为该容器添加一个虚拟网络接口  
+> docker network connect mynet j//为该容器添加一个虚拟网络接口  
 > 此时已经可以ping通网络了
 
 ### 练习：redis集群
