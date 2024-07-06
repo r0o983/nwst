@@ -199,7 +199,7 @@ WantedBy = multi-user.target
 
 将frpc.service 存放到`/lib/systemd/system/`下
 
-将`frpc 移动到 `/usr/bin/`中
+将`frpc `移动到 `/usr/bin/`中
 
 创建一个新的文件夹`mkdir /etc/frp/` ，将`frpc.ini` 移动到该目录下
 
