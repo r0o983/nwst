@@ -127,7 +127,7 @@ dpkg-reconfigure locales  // 设置多语言环境
   Type=Application
   Name=Conky
   Comment=Start conky script
-  Exec=conky -d
+  Exec=conky --daemonize --pause=5
   OnlyShowIn=GNOME
   X-GNOME-Autostart-Phase=Application
   Name[en_US]=conky.desktop
